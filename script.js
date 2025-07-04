@@ -83,6 +83,14 @@ function updateList() {
     document.getElementById("accgrid").appendChild(accountCard);
   });
 }
+function hapusAkun(index) {
+  let konifrmasi = confirm("anda yakin ingin menghapus akun?");
+  if (konifrmasi) {
+    data.splice(index, 1);
+  } else {
+    alert("penghapusan akun dibatalkan oleh user");
+  }
+}
 function showForm() {
   // Buat div pembungkus
   const formDiv = document.createElement("div");
@@ -242,7 +250,7 @@ function editAkun() {
   closeBtn.addEventListener("click", () => {
     container.remove();
   });
-  data.forEach((item) => {
+  data.forEach((item, index) => {
     const akunSelector = document.createElement("div");
     akunSelector.className = "akun-selector";
 
@@ -263,6 +271,10 @@ function editAkun() {
 
     const deleteImg = document.createElement("img");
     deleteImg.src = "assets/icon/delete.png";
+    deleteImg.addEventListener("click", () => {
+      hapusAkun(index);
+      updateList();
+    });
     iconDiv.appendChild(deleteImg);
 
     akunDiv.appendChild(iconDiv);
